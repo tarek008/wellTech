@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane stylesheets="@../css/style.css" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.welltech.controller.ObjectivesController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="navbar">
+         <children>
+            <Label styleClass="navbar-title" text="WellTech Psychiatry" />
+            <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="userNameLabel" text="Welcome, [Name]" />
+                  <Button fx:id="logoutButton" onAction="#handleLogout" text="Logout" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
+   <left>
+      <VBox spacing="10.0" styleClass="sidebar">
+         <children>
+            <Button fx:id="dashboardButton" maxWidth="Infinity" styleClass="sidebar-button" text="Dashboard" onAction="#navigateToDashboard" />
+            <Button fx:id="patientsButton" maxWidth="Infinity" styleClass="sidebar-button" text="Patients" />
+            <Button fx:id="appointmentsButton" maxWidth="Infinity" styleClass="sidebar-button" text="Appointments" />
+            <Button fx:id="objectivesButton" maxWidth="Infinity" styleClass="sidebar-button, active" text="Objectives" />
+            <Button fx:id="articlesButton" maxWidth="Infinity" styleClass="sidebar-button" text="Articles" onAction="#navigateToArticles" />
+            <Button fx:id="profileButton" maxWidth="Infinity" styleClass="sidebar-button" text="Profile" onAction="#navigateToProfile" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+         </padding>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="20.0">
+         <children>
+            <Text styleClass="page-title" text="Objectives Management" />
+            
+            <HBox spacing="20.0">
+               <children>
+                  <!-- Objective List Section -->
+                  <VBox spacing="10.0" styleClass="dashboard-card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                           <children>
+                              <Label styleClass="card-title" text="Objectives" />
+                              <HBox spacing="10.0" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="searchField" promptText="Search by title..." />
+                                    <Button fx:id="searchButton" text="Search" onAction="#handleSearch" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="objectivesTable">
+                          <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+                            <TableColumn fx:id="titleColumn" prefWidth="150.0" text="Title" />
+                            <TableColumn fx:id="pointsColumn" prefWidth="100.0" text="Points" />
+                            <TableColumn fx:id="dateCreatedColumn" prefWidth="120.0" text="Created" />
+                            <TableColumn fx:id="actionColumn" prefWidth="100.0" text="Action" />
+                          </columns>
+                        </TableView>
+                        <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                           <children>
+                              <Button text="Top Objectives" onAction="#handleShowTopObjectives" />
+                              <ComboBox fx:id="pointsFilterComboBox" promptText="Filter by points" />
+                              <Button text="Apply Filter" onAction="#handlePointsFilter" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Add/Edit Objective Form -->
+            <VBox spacing="10.0" styleClass="dashboard-card">
+               <children>
+                  <Label styleClass="card-title" text="Add New Objective" fx:id="formTitle" />
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Title" />
+                              <TextField fx:id="titleField" promptText="Enter objective title" />
+                              
+                              <Label text="Description" />
+                              <TextArea fx:id="descriptionField" promptText="Enter objective description" prefHeight="100.0" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Points Required" />
+                              <TextField fx:id="pointsField" promptText="Enter points (0-100)" />
+                              
+                              <Label text="Assign to User (Optional)" />
+                              <ComboBox fx:id="userComboBox" promptText="Select user" maxWidth="Infinity" />
+                              
+                              <HBox spacing="10.0" alignment="BOTTOM_RIGHT" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="clearButton" text="Clear" onAction="#handleClear" />
+                                    <Button fx:id="saveButton" text="Save Objective" onAction="#handleSave" styleClass="primary-button" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </VBox>
+            
+            <!-- Date Filter Section -->
+            <VBox spacing="10.0" styleClass="dashboard-card">
+               <children>
+                  <Label styleClass="card-title" text="Filter by Date Range" />
+                  <HBox spacing="15.0" alignment="CENTER_LEFT">
+                     <children>
+                        <Label text="From:" />
+                        <DatePicker fx:id="fromDatePicker" />
+                        <Label text="To:" />
+                        <DatePicker fx:id="toDatePicker" />
+                        <Button text="Apply Date Filter" onAction="#handleDateFilter" />
+                        <Button text="Reset Filters" onAction="#handleResetFilters" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane> 

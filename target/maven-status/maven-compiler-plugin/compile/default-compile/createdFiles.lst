@@ -12,6 +12,7 @@ com\welltech\controller\PsychiatristDashboardController.class
 com\welltech\controller\ProfileController.class
 module-info.class
 com\welltech\controller\ArticleEditController$1.class
+com\welltech\controller\ObjectivesController$1.class
 com\welltech\controller\PatientDashboardController.class
 com\welltech\controller\ArticlesListController$2.class
 com\welltech\model\User.class
@@ -20,4 +21,5 @@ com\welltech\db\DatabaseConnection.class
 com\welltech\model\Article.class
 com\welltech\controller\ArticlesListController$1.class
 com\welltech\dao\ArticleDAO.class
+com\welltech\controller\ObjectivesController$2.class
 com\welltech\controller\ProfileController$1.class

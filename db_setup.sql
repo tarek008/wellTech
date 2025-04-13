@@ -69,6 +69,40 @@ CREATE TABLE IF NOT EXISTS support_messages (
     FOREIGN KEY (admin_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
+-- Create coupon table
+CREATE TABLE IF NOT EXISTS coupon (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    discount_percentage INT NOT NULL CHECK (discount_percentage BETWEEN 0 AND 100),
+    code VARCHAR(50) NOT NULL UNIQUE,
+    is_active TINYINT(1) DEFAULT 1,
+    expiration_date DATETIME NOT NULL,
+    usage_count INT DEFAULT 0
+);
+
+-- Create consultation_coupon table
+CREATE TABLE IF NOT EXISTS consultation_coupon (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    coupon_id INT NOT NULL,
+    user_id INT NOT NULL,
+    nbr_consultation INT NOT NULL,
+    status ENUM('pending', 'completed') DEFAULT 'pending',
+    FOREIGN KEY (coupon_id) REFERENCES coupon(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Create objective table
+CREATE TABLE IF NOT EXISTS objective (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    points_required INT NOT NULL CHECK (points_required >= 0),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
 -- Insert an admin user for initial access
 INSERT INTO users (username, password, full_name, email, phone_number, role)
 VALUES ('admin', 'admin123', 'System Administrator', 'admin@welltech.com', '1234567890', 'ADMIN');

@@ -109,4 +109,13 @@ public class PsychiatristDashboardController implements Initializable {
         System.out.println("Navigating to articles");
         WellTechApplication.loadFXML("articlesList");
     }
+
+    /**
+     * Navigate to the objectives page
+     */
+    @FXML
+    private void navigateToObjectives(ActionEvent event) {
+        System.out.println("Navigating to objectives");
+        WellTechApplication.loadFXML("objectives");
+    }
 } 
