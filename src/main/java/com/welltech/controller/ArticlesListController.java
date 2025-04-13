@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -259,7 +260,7 @@ public class ArticlesListController implements Initializable {
                             Article article = getTableRow().getItem();
                             
                             // Create HBox for buttons
-                            javafx.scene.layout.HBox hbox = new javafx.scene.layout.HBox(5);
+                            HBox hbox = new HBox(5);
                             hbox.getChildren().add(viewBtn);
                             
                             // Only show edit/delete if user is admin or is the author
