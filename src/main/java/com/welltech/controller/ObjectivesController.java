@@ -120,6 +120,9 @@ public class ObjectivesController implements Initializable {
             // Add action buttons to the table
             actionColumn.setCellFactory(createActionCellFactory());
             
+            // Load users for the user combo box
+            loadUsers();
+            
             // Load initial data
             loadObjectives();
             
@@ -438,5 +441,53 @@ public class ObjectivesController implements Initializable {
     @FXML
     private void handleLogout(ActionEvent event) {
         LoginController.logout();
+    }
+    
+    /**
+     * Load all users from the database into the user combo box
+     */
+    private void loadUsers() {
+        try {
+            // Create UserDAO to access user data
+            com.welltech.dao.UserDAO userDAO = new com.welltech.dao.UserDAO();
+            
+            // Get all users from the database
+            List<User> users = userDAO.getAllUsers();
+            
+            // Clear existing items and add all users
+            userComboBox.getItems().clear();
+            userComboBox.getItems().addAll(users);
+            
+            // Setup the display string for each user in the combo box
+            userComboBox.setCellFactory(param -> new ListCell<User>() {
+                @Override
+                protected void updateItem(User user, boolean empty) {
+                    super.updateItem(user, empty);
+                    if (empty || user == null) {
+                        setText(null);
+                    } else {
+                        setText(user.getFullName() + " (" + user.getUsername() + ")");
+                    }
+                }
+            });
+            
+            // Also set how the selected item is displayed in the combo box when collapsed
+            userComboBox.setButtonCell(new ListCell<User>() {
+                @Override
+                protected void updateItem(User user, boolean empty) {
+                    super.updateItem(user, empty);
+                    if (empty || user == null) {
+                        setText(null);
+                    } else {
+                        setText(user.getFullName() + " (" + user.getUsername() + ")");
+                    }
+                }
+            });
+            
+            System.out.println("Loaded " + users.size() + " users into combo box");
+        } catch (Exception e) {
+            System.err.println("Error loading users: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 } 

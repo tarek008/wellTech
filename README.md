@@ -90,21 +90,6 @@ mvn clean javafx:run
 - `src/main/resources/css`: CSS stylesheets
 - `src/main/resources/images`: Image assets
 
-## Initial Login Credentials
-
-- **Admin**:
-
-  - Username: admin
-  - Password: admin123
-
-- **Psychiatrist**:
-
-  - Username: doctor
-  - Password: doctor123
-
-- **Patient**:
-  - Username: patient
-  - Password: patient123
 
 ## Troubleshooting
 

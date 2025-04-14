@@ -33,6 +33,9 @@ public class WellTechApplication extends Application {
         primaryStage = stage;
         primaryStage.setTitle("WellTech Psychiatry Platform");
         
+        // Make the window maximized
+        primaryStage.setMaximized(true);
+        
         // Load initial scene
         loadFXML("login");
     }
@@ -48,6 +51,10 @@ public class WellTechApplication extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            
+            // Ensure window stays maximized when changing scenes
+            primaryStage.setMaximized(true);
+            
             primaryStage.show();
         } catch (IOException e) {
             System.err.println("Error loading FXML: " + e.getMessage());
