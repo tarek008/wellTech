@@ -9,6 +9,7 @@ com\welltech\controller\ProfileController.class
 com\welltech\controller\ArticlesListController$2.class
 com\welltech\db\DatabaseConnection.class
 com\welltech\model\Article.class
+com\welltech\controller\ObjectivesController$4.class
 com\welltech\controller\ArticlesListController$1.class
 com\welltech\controller\ArticleEditController.class
 com\welltech\controller\CouponController$3.class
